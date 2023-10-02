@@ -123,8 +123,8 @@ app.post("/login", (req, res) => {
 });
 
 const razorpay = new Razorpay({
-  key_id: "rzp_test_ye5F2bEFf7ME0n",
-  key_secret: "NotlwtHFM3R48ZAOsgKJSlFp",
+  key_id: "rzp_test_1E5NDzeBvqbYBb",
+  key_secret: "WvYYbFS7nqJDSWSVyWFQUWXB",
 });
 
 app.get("/logo.svg", (req, res) => {

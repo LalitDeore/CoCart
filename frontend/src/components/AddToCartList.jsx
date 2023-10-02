@@ -19,8 +19,6 @@ function loadScript(src) {
   });
 }
 
-const __DEV__ = document.domain === "localhost";
-
 const AddToCartList = () => {
   const { cartItem, setCartItem, quantity, name, email, mobile } =
     useAppContext();
@@ -62,7 +60,7 @@ const AddToCartList = () => {
     console.log(data);
 
     const options = {
-      key: __DEV__ ? "rzp_test_ye5F2bEFf7ME0n" : "PRODUCTION_KEY",
+      key: "rzp_test_1E5NDzeBvqbYBb",
       currency: data.currency,
       amount: amount.toString(),
       order_id: data.id,
