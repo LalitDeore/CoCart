@@ -35,10 +35,13 @@ const Login = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.post("https://cocart.onrender.com/login", {
-        email: data.email,
-        password: data.password,
-      });
+      const response = await Axios.post(
+        "https://ecommerce-final-0fez.onrender.com/login",
+        {
+          email: data.email,
+          password: data.password,
+        }
+      );
 
       if (response.status === 200) {
         const { userName, userEmail, userMobile } = response.data;

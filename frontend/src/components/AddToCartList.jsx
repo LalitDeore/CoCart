@@ -48,13 +48,16 @@ const AddToCartList = () => {
       return;
     }
 
-    const data = await fetch("https://cocart.onrender.com/razorpay", {
-      method: "POST",
-      body: JSON.stringify({ price: total.toFixed(2) }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((t) => t.json());
+    const data = await fetch(
+      "https://ecommerce-final-0fez.onrender.com/razorpay",
+      {
+        method: "POST",
+        body: JSON.stringify({ price: total.toFixed(2) }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((t) => t.json());
 
     console.log(data);
 

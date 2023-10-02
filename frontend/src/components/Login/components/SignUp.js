@@ -48,7 +48,7 @@ const SignUp = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    Axios.post("https://cocart.onrender.com/signup", {
+    Axios.post("https://ecommerce-final-0fez.onrender.com/signup", {
       name: data.name,
       email: data.email,
       number: data.number,
