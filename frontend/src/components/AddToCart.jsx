@@ -21,7 +21,6 @@ const AddToCart = ({ cartItem, serialNo, onRemove }) => {
   };
 
   const increaseQuantity = () => {
-    // Update the quantity for the specific item
     setCartItem((prevCart) =>
       prevCart.map((item) =>
         item === cartItem ? { ...item, quantity: item.quantity + 1 } : item

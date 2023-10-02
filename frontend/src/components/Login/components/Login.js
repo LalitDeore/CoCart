@@ -32,21 +32,16 @@ const Login = () => {
     setTouched({ ...touched, [event.target.name]: true });
   };
 
-  // const submitHandler = (event) => {
-  //   event.preventDefault();
-  //   checkData(data);
-  // };
-  // Inside your submitHandler for login
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.post("http://localhost:3003/login", {
+      const response = await Axios.post("https://cocart.onrender.com/login", {
         email: data.email,
         password: data.password,
       });
 
       if (response.status === 200) {
-        const { userName, userEmail, userMobile } = response.data; // Extract user name from response
+        const { userName, userEmail, userMobile } = response.data;
 
         console.log(userName, userEmail, userMobile);
         setName(userName);
@@ -56,7 +51,7 @@ const Login = () => {
           success: `Welcome, ${userName}! You logged in successfully`,
           error: "Something went wrong!",
         });
-        navigate("/"); // Navigate to the home page after successful login
+        navigate("/");
         setIsLogIn(true);
       } else {
         toast("Your password or email is wrong", {

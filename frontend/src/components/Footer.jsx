@@ -32,13 +32,13 @@ const Footer = () => {
           <h3>Follow Us</h3>
           <ul>
             <li>
-              <a href="#">Facebook</a>
+              <a href="/">Facebook</a>
             </li>
             <li>
-              <a href="#">Twitter</a>
+              <a href="/">Twitter</a>
             </li>
             <li>
-              <a href="#">Instagram</a>
+              <a href="/">Instagram</a>
             </li>
           </ul>
         </div>

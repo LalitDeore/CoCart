@@ -47,9 +47,6 @@ const Filter = () => {
       setIsClickOnPrice(false);
       setIsClickOnRating(false);
     }
-    // else {
-    //   setIsClickOnAscending(false);
-    // }
   };
 
   const sortDescending = () => {
@@ -59,9 +56,6 @@ const Filter = () => {
       setIsClickOnPrice(false);
       setIsClickOnRating(false);
     }
-    // else {
-    //   setIsClickOnDescending(false);
-    // }
   };
   const sortByPrice = () => {
     if (isClickOnPrice === false) {

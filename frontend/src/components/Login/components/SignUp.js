@@ -46,51 +46,9 @@ const SignUp = () => {
     setTouched({ ...touched, [event.target.name]: true });
   };
 
-  // const submitHandler = (event) => {
-  //   event.preventDefault();
-  //   if (!Object.keys(errors).length) {
-  //     // Pushing data to database usuing PHP script
-  //     const urlApi = `https://lightem.senatorhost.com/login-react/index.php?email=${data.email.toLowerCase()}&password=${
-  //       data.password
-  //     }&register=true`;
-  //     const pushData = async () => {
-  //       const responseA = axios.get(urlApi);
-  //       const response = await toast.promise(responseA, {
-  //         pending: "Check your data",
-  //         success: "Checked!",
-  //         error: "Something went wrong!",
-  //       });
-  //       if (response.data.ok) {
-  //         notify("You signed Up successfully", "success");
-  //       } else {
-  //         notify(
-  //           "You have already registered, log in to your account",
-  //           "warning"
-  //         );
-  //       }
-  //     };
-  //     pushData();
-  //   } else {
-  //     notify("Please Check fields again", "error");
-  //     setTouched({
-  //       name: true,
-  //       email: true,
-  //       number: true,
-  //       password: true,
-  //       confirmPassword: true,
-  //       IsAccepted: false,
-  //     });
-  //   }
-  // };
-
-  // const mobileIconStyle = {
-  //   display: "flex",
-  //   flexDirection: "row",
-  // };
-
   const submitHandler = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:3003/signup", {
+    Axios.post("https://cocart.onrender.com/signup", {
       name: data.name,
       email: data.email,
       number: data.number,

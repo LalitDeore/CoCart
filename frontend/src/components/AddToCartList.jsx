@@ -48,9 +48,9 @@ const AddToCartList = () => {
       return;
     }
 
-    const data = await fetch("http://localhost:3003/razorpay", {
+    const data = await fetch("https://cocart.onrender.com/razorpay", {
       method: "POST",
-      body: JSON.stringify({ price: total.toFixed(2) }), // Send 'price' in the request body
+      body: JSON.stringify({ price: total.toFixed(2) }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -107,7 +107,6 @@ const AddToCartList = () => {
             ))}
           </tbody>
         </table>
-        {/* Display individual product details and total price */}
         <div className="cart-summary">
           <div className="cart-summary-item">
             <span>Total Price:</span>
@@ -118,9 +117,7 @@ const AddToCartList = () => {
               </span>
             </div>
           </div>
-          {/* Display other product details here */}
         </div>
-        {/* Order Now button */}
         <button
           className="order-now-button"
           onClick={displayRazorpay}
