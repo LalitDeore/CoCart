@@ -1,0 +1,128 @@
+.product-card {
+  position: relative;
+  display: inline-block;
+  width: 18%; /* Adjusted width to display 5 products per row */
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  text-align: center; /* Center text horizontally */
+  box-sizing: border-box; 
+}
+  .product-card:hover{
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    z-index: 1;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+  }
+  
+  .product-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .product-card p {
+    margin: 5px 0;
+  }
+
+  .product-card button{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff9900;
+    color: #fff; 
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  .purchase-button{
+    display: inline-block;
+    background-color: #ff9900;
+    color: #fff; 
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: fit-content;
+  }
+
+  .product-card button:hover{
+    background-color: #e68a00;
+  }
+
+  .button-container{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-button{
+    display: inline-block;
+    background-color: #4caf50; 
+    color: #fff; 
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+    text-transform: none;
+    height: 45px;
+  }
+
+  .card-button:hover{
+    background-color: #45a049;
+  }
+
+ .rating{
+  display: flex;
+  flex-direction: row;
+ }
+ .review{
+  font-size: 15px;
+  margin-left: 0px;
+  font-weight: bold;
+ }
+ 
+
+ @media (max-width: 768px) {
+  .product-card {
+    width: 100%;  
+    margin: 10px 0; 
+    padding: 20px 10px; 
+  }
+
+  .product-card:hover {
+    transform: translateY(0); 
+  }
+
+  .product-card h3 {
+    font-size: 16px;  
+  }
+
+  .product-card  {
+    margin: 10px 0;  
+  }
+
+  .product-card .button-container {
+    text-align: center;
+  }
+
+  .product-card button,
+  .purchase-button {
+    width: 100%;  
+    margin: 10px 0;  
+  }
+  .rating{
+    justify-content: center;
+  }
+}
