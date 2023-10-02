@@ -6,14 +6,15 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const Razorpay = require("razorpay");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
 const db = mysql.createConnection({
-  host: DB_HOST,
-  user: DB_USERNAME,
-  password: DB_PASSWORD,
-  database: DB_DBNAME,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DBNAME,
 });
 
 db.connect((error) => {
