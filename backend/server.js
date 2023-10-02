@@ -10,10 +10,10 @@ const Razorpay = require("razorpay");
 const app = express();
 app.use(cors());
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "ecommerce",
+  host: DB_HOST,
+  user: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_DBNAME,
 });
 
 db.connect((error) => {
