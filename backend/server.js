@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const shortid = require("shortid");
@@ -12,10 +12,11 @@ const PORT = process.env.PORT || 3003;
 const app = express();
 app.use(cors());
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DBNAME,
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT,
 });
 
 db.connect((error) => {
@@ -185,5 +186,5 @@ app.post("/razorpay", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("server is running on 3003 port");
+  console.log(`server is running on ${PORT} port`);
 });
