@@ -4,7 +4,6 @@ import passwordIcon from "../img/password.svg";
 import styles from "./SignUp.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { notify } from "./toast";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +36,7 @@ const Login = () => {
     try {
       const response = await Axios.post(
         "https://ecommerce-final-0fez.onrender.com/login",
+
         {
           email: data.email,
           password: data.password,

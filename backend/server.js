@@ -8,6 +8,7 @@ const shortid = require("shortid");
 const Razorpay = require("razorpay");
 require("dotenv").config();
 
+const PORT = process.env.PORT || 3003;
 const app = express();
 app.use(cors());
 const db = mysql.createConnection({
@@ -183,6 +184,6 @@ app.post("/razorpay", async (req, res) => {
   }
 });
 
-app.listen(3003, () => {
+app.listen(PORT, () => {
   console.log("server is running on 3003 port");
 });
