@@ -79,6 +79,13 @@
     color: #333;
     position: relative;
   }
+  .item{
+    border: none;
+    background-color: transparent;
+    justify-content: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
   
   .nav-item .item:hover  {
     color: #f39c12;

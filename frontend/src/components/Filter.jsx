@@ -65,7 +65,13 @@ const Filter = () => {
       setIsClickOnRating(false);
     }
   };
-  const clearButtonHandler = () => {};
+  const clearButtonHandler = () => {
+    setIsClickOnClearButton(true);
+    setIsClickOnAscending(false);
+    setIsClickOnDescending(false);
+    setIsClickOnPrice(false);
+    setIsClickOnRating(false);
+  };
 
   const sortByRating = () => {
     if (isClickOnRating === false) {

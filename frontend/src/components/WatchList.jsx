@@ -23,7 +23,7 @@ const WatchList = () => {
   );
 
   useEffect(() => {
-    if (filteredProduct === 0) {
+    if (filteredProduct.length === 0) {
       setFound(true);
     } else {
       setFound(false);

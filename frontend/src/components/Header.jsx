@@ -62,10 +62,10 @@ const Header = () => {
         <div className="nav-item">
           <ul className="list">
             <li className="dropdown">
-              <a className="item" href="#categories" onClick={dropDownHandler}>
+              <button className="item" href="/" onClick={dropDownHandler}>
                 Categories
                 <IoIosArrowDropdown className="dropdown-icon" />
-              </a>
+              </button>
 
               {isDropdownOpen && (
                 <ul className="dropdown-menu">

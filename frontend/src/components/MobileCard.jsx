@@ -43,7 +43,7 @@ const MobileCard = ({ Mobile }) => {
           </button>
           <button
             className="card-button"
-            style={{ marginLeft: 20 }}
+            style={{ backgroundColor: "#ff9900", color: "white" }}
             onClick={cartEventHandler}
           >
             Add to Cart

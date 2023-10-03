@@ -42,13 +42,17 @@ const ProductCard = ({ Earphones, addToCartClick }) => {
             <BsCurrencyRupee className="rupee-icon" />
             <span>{Earphones.price}</span>
           </button>
-          <Button
+          <button
             className="card-button"
+            style={{
+              backgroundColor: "#ff9900",
+              color: "white",
+              padding: " 8px 0 8px 0",
+            }}
             onClick={addToCartEventHandler}
-            style={{ textTransform: "none" }}
           >
             Add To Cart
-          </Button>
+          </button>
         </div>
       </div>
       <ToastContainer />
