@@ -1,6 +1,6 @@
 # CoCart - Your eCommerce Solution
 
-![CoCart Logo](path-to-your-logo.png)
+![CoCart Logo](/frontend/src/Images/logo.png)
 
 CoCart is a powerful and flexible eCommerce solution for building an online store. It provides a seamless shopping experience for customers and robust tools for merchants to manage their store.
 
@@ -35,5 +35,14 @@ CoCart is a powerful and flexible eCommerce solution for building an online stor
 ### Payment
 ![Payment](/frontend/src/Images/payment.png)
 *CoCart supports multiple payment gateways, ensuring a secure and convenient payment process for customers. It provides a smooth and trustworthy payment experience.*
+
+### Sign UP 
+![SignUp](/frontend/src/Images/signup.png)
+*The CoCart Sign Up page allows new users to create an account. Users can fill in their details, such as name, email, phone number, and password, to register for an account.*
+
+
+### Login
+![Login](/frontend/src/Images/login.png)
+*The CoCart Login page allows users to sign in to their accounts. It provides a secure authentication process for registered users.*
 
 
