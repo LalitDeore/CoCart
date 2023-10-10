@@ -213,6 +213,8 @@
   background-color: transparent;
   cursor: pointer;
   border: none;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 
@@ -321,6 +323,52 @@
     height: 20px;
   }
 }
- 
 
+
+
+
+
+/* Add this style to your existing CSS */
+.mobile-vertical-menu .account-button .dropdown-icon {
+  margin-left: 8px;
+  color: #333;
+  margin-top: 5px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-vertical-menu .account-button.open .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.mobile-vertical-menu .vertical-dropdown-menu {
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  list-style: none;
+  padding: 0;
+  z-index: 10;
+  margin-top: 5px;
+  margin-left: 0; /* Adjust margin-left as needed */
+}
+
+.mobile-vertical-menu .vertical-dropdown-menu li {
+  padding: 8px 15px;
+  width: 150px;
+}
+
+.mobile-vertical-menu .vertical-dropdown-menu a {
+  color: #333;
+  text-decoration: none;
+}
+
+.mobile-vertical-menu .vertical-item:last-child .vertical-dropdown-menu {
+  border-bottom: 1px solid #ccc;
+}
+
+.user-name{
+  font-size: 20px;
+  font-weight: bold;
+}
 

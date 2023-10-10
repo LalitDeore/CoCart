@@ -3,6 +3,8 @@ export const validate = (data, type) => {
 
   if (!data.email) {
     errors.email = "Email is Required!";
+  } else if (!data.email.length === 0) {
+    errors.email = "Email can't be empty";
   } else if (
     !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
       String(data.email).toLowerCase()

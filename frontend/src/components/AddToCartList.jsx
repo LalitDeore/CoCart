@@ -4,6 +4,7 @@ import { useAppContext } from "../Shares/ContextFile";
 import "../componentsCSS/AddToCartList.css";
 import { BsCurrencyRupee } from "react-icons/bs";
 import logo from "../Images/logo.png";
+import Loader from "./Loader";
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -20,8 +21,16 @@ function loadScript(src) {
 }
 
 const AddToCartList = () => {
-  const { cartItem, setCartItem, quantity, name, email, mobile } =
-    useAppContext();
+  const {
+    cartItem,
+    setCartItem,
+    quantity,
+    name,
+    email,
+    mobile,
+    loading,
+    setLoading,
+  } = useAppContext();
   const [serialNo, setSerialNo] = useState(1);
 
   const removeItem = (indexToRemove) => {
@@ -29,13 +38,13 @@ const AddToCartList = () => {
     setCartItem(updatedCart);
   };
 
-  // Calculate the total price of all items in the cart
   const total = cartItem.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
 
   async function displayRazorpay() {
+    setLoading(true);
     const amount = total.toFixed(2);
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
@@ -80,10 +89,16 @@ const AddToCartList = () => {
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
+    setLoading(false);
   }
 
   return (
     <React.Fragment>
+      {loading && (
+        <div className="loader-container">
+          <Loader />
+        </div>
+      )}
       <div className="add-cart-list">
         <h2 className="cart-title">Shopping Cart</h2>
         <table className="cart-table">

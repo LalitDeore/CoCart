@@ -8,14 +8,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { notify } from "./toast";
 import { Link } from "react-router-dom";
-// import axios, { Axios } from "axios";
 import { AiFillPhone } from "react-icons/ai";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../Shares/ContextFile";
+import Loader from "../../Loader";
 
 const SignUp = () => {
-  const { setIsLogIn, setName, setEmail, setMobile } = useAppContext();
+  const { setIsLogIn, setName, setEmail, setMobile, loading, setLoading } =
+    useAppContext();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -48,6 +49,33 @@ const SignUp = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    if (
+      !data.name ||
+      !data.email ||
+      !data.number ||
+      !data.password ||
+      !data.confirmPassword
+    ) {
+      if (!data.name) {
+        notify("Name is required", "warning");
+      }
+      if (!data.email) {
+        notify("Email is required", "warning");
+      }
+      if (!data.number) {
+        notify("Mobile Number is required", "warning");
+      }
+      if (!data.password) {
+        notify("Password is required", "warning");
+      }
+      if (!data.confirmPassword) {
+        notify("Confirm Password is required", "warning");
+      }
+      return;
+    }
+
+    setLoading(true);
     Axios.post("https://ecommerce-final-0fez.onrender.com/signup", {
       name: data.name,
       email: data.email,
@@ -62,6 +90,7 @@ const SignUp = () => {
         setEmail(data.email);
         setIsLogIn(true);
         notify("You signed up successfully", "success");
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -70,177 +99,185 @@ const SignUp = () => {
         } else {
           notify("Something went wrong!", "error");
         }
+        setLoading(false);
       });
   };
 
   return (
-    <div className={styles.container}>
-      <form
-        className={styles.formLogin}
-        onSubmit={submitHandler}
-        autoComplete="off"
-      >
-        <h2>Sign Up</h2>
-        <div>
-          <div
-            className={
-              errors.name && touched.name
-                ? styles.unCompleted
-                : !errors.name && touched.name
-                ? styles.completed
-                : undefined
-            }
-          >
-            <input
-              type="text"
-              name="name"
-              value={data.name}
-              placeholder="Name"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={userIcon} alt="" />
-          </div>
-          {errors.name && touched.name && (
-            <span className={styles.error}>{errors.name}</span>
-          )}
+    <React.Fragment>
+      {loading && (
+        <div className="loader-container">
+          <Loader />
         </div>
-        <div>
-          <div
-            className={
-              errors.email && touched.email
-                ? styles.unCompleted
-                : !errors.email && touched.email
-                ? styles.completed
-                : undefined
-            }
-          >
-            <input
-              type="text"
-              name="email"
-              value={data.email}
-              placeholder="E-mail"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={emailIcon} alt="" />
+      )}
+      <div className={styles.container}>
+        <form
+          className={styles.formLogin}
+          onSubmit={submitHandler}
+          autoComplete="off"
+        >
+          <h2>Sign Up</h2>
+          <div>
+            <div
+              className={
+                errors.name && touched.name
+                  ? styles.unCompleted
+                  : !errors.name && touched.name
+                  ? styles.completed
+                  : undefined
+              }
+            >
+              <input
+                type="text"
+                name="name"
+                value={data.name}
+                placeholder="Name"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={userIcon} alt="" />
+            </div>
+            {errors.name && touched.name && (
+              <span className={styles.error}>{errors.name}</span>
+            )}
           </div>
-          {errors.email && touched.email && (
-            <span className={styles.error}>{errors.email}</span>
-          )}
-        </div>
-        <div>
-          <div
-            className={
-              errors.number && touched.number
-                ? styles.unCompleted
-                : !errors.number && touched.number
-                ? styles.completed
-                : undefined
-            }
-          >
-            <input
-              type="number"
-              name="number"
-              value={data.number}
-              placeholder="Mobile Number"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <AiFillPhone className={styles.mobileIcon} />
+          <div>
+            <div
+              className={
+                errors.email && touched.email
+                  ? styles.unCompleted
+                  : !errors.email && touched.email
+                  ? styles.completed
+                  : undefined
+              }
+            >
+              <input
+                type="text"
+                name="email"
+                value={data.email}
+                placeholder="E-mail"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={emailIcon} alt="" />
+            </div>
+            {errors.email && touched.email && (
+              <span className={styles.error}>{errors.email}</span>
+            )}
           </div>
-          {errors.number && touched.number && (
-            <span className={styles.error}>{errors.number}</span>
-          )}
-        </div>
+          <div>
+            <div
+              className={
+                errors.number && touched.number
+                  ? styles.unCompleted
+                  : !errors.number && touched.number
+                  ? styles.completed
+                  : undefined
+              }
+            >
+              <input
+                type="number"
+                name="number"
+                value={data.number}
+                placeholder="Mobile Number"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <AiFillPhone className={styles.mobileIcon} />
+            </div>
+            {errors.number && touched.number && (
+              <span className={styles.error}>{errors.number}</span>
+            )}
+          </div>
 
-        <div>
-          <div
-            className={
-              errors.password && touched.password
-                ? styles.unCompleted
-                : !errors.password && touched.password
-                ? styles.completed
-                : undefined
-            }
-          >
-            <input
-              type="password"
-              name="password"
-              value={data.password}
-              placeholder="Password"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={passwordIcon} alt="" />
+          <div>
+            <div
+              className={
+                errors.password && touched.password
+                  ? styles.unCompleted
+                  : !errors.password && touched.password
+                  ? styles.completed
+                  : undefined
+              }
+            >
+              <input
+                type="password"
+                name="password"
+                value={data.password}
+                placeholder="Password"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={passwordIcon} alt="" />
+            </div>
+            {errors.password && touched.password && (
+              <span className={styles.error}>{errors.password}</span>
+            )}
           </div>
-          {errors.password && touched.password && (
-            <span className={styles.error}>{errors.password}</span>
-          )}
-        </div>
-        <div>
-          <div
-            className={
-              errors.confirmPassword && touched.confirmPassword
-                ? styles.unCompleted
-                : !errors.confirmPassword && touched.confirmPassword
-                ? styles.completed
-                : !errors.confirmPassword && touched.confirmPassword
-                ? styles.completed
-                : undefined
-            }
-          >
-            <input
-              type="password"
-              name="confirmPassword"
-              value={data.confirmPassword}
-              placeholder="Confirm Password"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={passwordIcon} alt="" />
+          <div>
+            <div
+              className={
+                errors.confirmPassword && touched.confirmPassword
+                  ? styles.unCompleted
+                  : !errors.confirmPassword && touched.confirmPassword
+                  ? styles.completed
+                  : !errors.confirmPassword && touched.confirmPassword
+                  ? styles.completed
+                  : undefined
+              }
+            >
+              <input
+                type="password"
+                name="confirmPassword"
+                value={data.confirmPassword}
+                placeholder="Confirm Password"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={passwordIcon} alt="" />
+            </div>
+            {errors.confirmPassword && touched.confirmPassword && (
+              <span className={styles.error}>{errors.confirmPassword}</span>
+            )}
           </div>
-          {errors.confirmPassword && touched.confirmPassword && (
-            <span className={styles.error}>{errors.confirmPassword}</span>
-          )}
-        </div>
-        <div>
-          <div className={styles.terms}>
-            <input
-              type="checkbox"
-              name="IsAccepted"
-              value={data.IsAccepted}
-              id="accept"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-            />
-            <label htmlFor="accept">I accept terms of privacy policy</label>
+          <div>
+            <div className={styles.terms}>
+              <input
+                type="checkbox"
+                name="IsAccepted"
+                value={data.IsAccepted}
+                id="accept"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+              />
+              <label htmlFor="accept">I accept terms of privacy policy</label>
+            </div>
+            {errors.IsAccepted && touched.IsAccepted && (
+              <span className={styles.error}>{errors.IsAccepted}</span>
+            )}
           </div>
-          {errors.IsAccepted && touched.IsAccepted && (
-            <span className={styles.error}>{errors.IsAccepted}</span>
-          )}
-        </div>
-        <div>
-          <button type="submit">Create Account</button>
-          <span
-            style={{
-              color: "#a29494",
-              textAlign: "center",
-              display: "inline-block",
-              width: "100%",
-            }}
-          >
-            Already have a account? <Link to="/login">Sign In</Link>
-          </span>
-        </div>
-      </form>
-      <ToastContainer />
-    </div>
+          <div>
+            <button type="submit">Create Account</button>
+            <span
+              style={{
+                color: "#a29494",
+                textAlign: "center",
+                display: "inline-block",
+                width: "100%",
+              }}
+            >
+              Already have a account? <Link to="/login">Sign In</Link>
+            </span>
+          </div>
+        </form>
+        <ToastContainer />
+      </div>
+    </React.Fragment>
   );
 };
 

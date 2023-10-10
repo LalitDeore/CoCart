@@ -188,6 +188,21 @@ const Header = () => {
                     <MdAccountCircle className="account-icon" />
                     Account
                   </button>
+                  {isAccountDropDownOpen && (
+                    <ul className="vertical-dropdown-menu">
+                      <li>
+                        <span className="user-name">{name}</span>
+                      </li>
+                      <li>
+                        <button
+                          className="logout-button"
+                          onClick={logoutHandler}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  )}
                 </li>
               ) : (
                 <li className="vertical-item">

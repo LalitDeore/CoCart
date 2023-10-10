@@ -19,6 +19,7 @@ const ContextFile = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [cartItem, setCartItem] = useState(() => {
     const savedCart = localStorage.getItem("cartItem");
@@ -70,6 +71,8 @@ const ContextFile = (props) => {
         setEmail,
         mobile,
         setMobile,
+        loading,
+        setLoading,
       }}
     >
       {props.children}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import emailIcon from "../img/email.svg";
 import passwordIcon from "../img/password.svg";
 import styles from "./SignUp.module.css";
@@ -8,16 +8,24 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../Shares/ContextFile";
+import Loader from "../../Loader";
+import { validate } from "./validate";
 
 const Login = () => {
-  const { setIsLogIn, setName, setEmail, setMobile } = useAppContext();
+  const { setIsLogIn, setName, setEmail, setMobile, loading, setLoading } =
+    useAppContext();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+
+  useEffect(() => {
+    setErrors(validate(data, "login"));
+  }, [data, touched]);
 
   const changeHandler = (event) => {
     if (event.target.name === "IsAccepted") {
@@ -33,10 +41,22 @@ const Login = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+
+    if (!data.email || !data.password) {
+      if (!data.email) {
+        toast("Email is required", { type: "warning" });
+      }
+      if (!data.password) {
+        toast("Password is required", { type: "warning" });
+      }
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const response = await Axios.post(
         "https://ecommerce-final-0fez.onrender.com/login",
-
         {
           email: data.email,
           password: data.password,
@@ -46,7 +66,6 @@ const Login = () => {
       if (response.status === 200) {
         const { userName, userEmail, userMobile } = response.data;
 
-        console.log(userName, userEmail, userMobile);
         setName(userName);
         setEmail(userEmail);
         setMobile(userMobile);
@@ -66,62 +85,74 @@ const Login = () => {
       toast("Something went wrong!", {
         type: "error",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <form
-        className={styles.formLogin}
-        onSubmit={submitHandler}
-        autoComplete="off"
-      >
-        <h2>Sign In</h2>
-        <div>
-          <div>
-            <input
-              type="text"
-              name="email"
-              value={data.email}
-              placeholder="E-mail"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={emailIcon} alt="" />
+    <React.Fragment>
+      {loading && (
+        <div className="loader-container">
+          <Loader />
+        </div>
+      )}
+      <div className={styles.container}>
+        <form
+          className={styles.formLogin}
+          onSubmit={submitHandler}
+          autoComplete="off"
+        >
+          <h2>Sign In</h2>
+          <div className="input-container">
+            <div>
+              <input
+                type="text"
+                name="email"
+                value={data.email}
+                placeholder="E-mail"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={emailIcon} alt="" />
+              {errors.email && touched.email && (
+                <span className={styles.error}>{errors.email}</span>
+              )}
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                value={data.password}
+                placeholder="Password"
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={passwordIcon} alt="" />
+              {errors.password && touched.password && (
+                <span className={styles.error}>{errors.password}</span>
+              )}
+            </div>
           </div>
-        </div>
-        <div>
           <div>
-            <input
-              type="password"
-              name="password"
-              value={data.password}
-              placeholder="Password"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={passwordIcon} alt="" />
+            <button type="submit">Login</button>
+            <span
+              style={{
+                color: "#a29494",
+                textAlign: "center",
+                display: "inline-block",
+                width: "100%",
+              }}
+            >
+              Don't have an account? <Link to="/signup">Create account</Link>
+            </span>
           </div>
-        </div>
-
-        <div>
-          <button type="submit">Login</button>
-          <span
-            style={{
-              color: "#a29494",
-              textAlign: "center",
-              display: "inline-block",
-              width: "100%",
-            }}
-          >
-            Don't have a account? <Link to="/signup">Create account</Link>
-          </span>
-        </div>
-      </form>
-      <ToastContainer />
-    </div>
+        </form>
+        <ToastContainer />
+      </div>
+    </React.Fragment>
   );
 };
 
